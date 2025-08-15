@@ -1,3 +1,23 @@
+setwd(r"(D:/output_PHIPSII)")
+input_file <- "out_20.assoc.txt"
+
+data1 <- read.table(input_file, header = TRUE)
+
+N <- length(data1$p_wald)
+expected_p <- (1:N) / N
+
+reduce <- data1[data1$p_wald < 0.005, ]
+
+reduce$chr[reduce$chr == "NC_056623.1"] <- 1
+reduce$chr[reduce$chr == "NC_056624.1"] <- 2
+reduce$chr[reduce$chr == "NC_056625.1"] <- 3
+reduce$chr[reduce$chr == "NC_056626.1"] <- 4
+reduce$chr[reduce$chr == "NC_056627.1"] <- 5
+reduce$chr[reduce$chr == "NC_056628.1"] <- 6
+reduce$chr[reduce$chr == "NC_056629.1"] <- 7
+reduce$chr[reduce$chr == "NC_056630.1"] <- 8
+reduce$chr[reduce$chr == "NC_056631.1"] <- 9
+
 chr_of_interest <- 1
 start_pos <- 206604115
 end_pos <- 209686575
@@ -49,4 +69,5 @@ ggplot(filtered_df_chr3, aes(x = ps, y = -log10(p_wald))) +
   labs(title = paste("Zoomed-in Manhattan Plot: chr", chr_of_interest, sep = ""),
        x = paste("Position on Chromosome", chr_of_interest),
        y = expression(-log10)) +
+
   theme_minimal () 
